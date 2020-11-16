@@ -6,8 +6,6 @@ export class Form extends Component {
     super(props);
     this.state = {
       cryptoList: undefined,
-      crypto: '',
-      currency: '',
     };
   }
   componentDidMount() {
@@ -16,7 +14,7 @@ export class Form extends Component {
   loadCryptos = async () => {
     this.setState({ loading: true });
     try {
-      const URL = "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=50&tsym=USD";
+      const URL = `https://min-api.cryptocompare.com/data/top/mktcapfull?limit=50&tsym=USD&api_key=${this.props.apikey}`;
       const response = await fetch(URL);
       const data = await response.json();
       this.setState({ loading: false, cryptoList: data.Data})
@@ -25,11 +23,11 @@ export class Form extends Component {
     }
   };
 
+
   handleCurrencyChange = (e) => {
     e.preventDefault();
     this.props.onCurrencyChange(e.target.value);
   };
-
   handleCryptoChange = (e) => {
     e.preventDefault();
     this.props.onCryptoChange(e.target.value);
@@ -68,7 +66,7 @@ export class Form extends Component {
             <option value="crypto">Cryptomonedas</option>
             {options}
           </select>
-          <button onClick={this.sendData} className="btn btn-success">
+          <button onClick={this.props.getQuotation} className="btn btn-success">
             Cotizar
           </button>
         </form>

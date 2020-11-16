@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import Loader from "./Loader";
+import Success from './Success';
 
 export class Outcome extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     if (this.props.loading) {
       return (
@@ -14,7 +12,14 @@ export class Outcome extends Component {
       );
     }
     if (this.props.error) {
-      return <div></div>;
+      return <div className="w-50 alert alert-warning">
+        <p>Things didn't happened the wished way</p>
+      </div>;
+    }
+    if (this.props.data) {
+      return <div className="w-50 container">
+        <Success data={this.props.data}></Success>
+      </div>;
     }
     return <div className="w-50 px-5"></div>;
   }
