@@ -13,7 +13,7 @@ export class Outcome extends Component {
     }
     if (this.props.error) {
       return <div className="w-50 alert alert-warning">
-        <p>Things didn't happened the wished way</p>
+        <p>Las cosas no sucedieron de manera esperada</p>
       </div>;
     }
     if (this.props.data) {
